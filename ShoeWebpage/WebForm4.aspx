@@ -17,10 +17,7 @@
     <meta name="viewport" content="width=device-width, initial=1"/>
 </head>
 <body>
-    <form>
-        <div>
-        </div>
-    </form>
+    <form id="form1" runat="server">
 
     <div class="navbar">
             <div class="logo">
@@ -33,8 +30,16 @@
                 <a href="WebForm4.aspx" class="selected">Comandă</a>
             </div>
 
-            <div class="user">
-                <a href="WebForm3.aspx"><i class="fa-solid fa-circle-user"></i></a>
+            <div class="dropdown">
+                <asp:LinkButton class="dropdownBtn" ID="Dropdown" runat="server">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <i class="fa fa-caret-down arrow"></i>
+                </asp:LinkButton>
+
+                <div class="dropdown-content">
+                    <a href="WebForm3.aspx">Inregistrare</a>
+                    <a href="WebForm3.aspx">Autentificare</a>
+                </div>
             </div>
      </div>
 
@@ -44,7 +49,7 @@
             
             <div class="card-body p-4 p-sm-5">
                 <h5 class="card-title text-center mb-5 fw-light fs-5 pt-3">Detalii Livrare</h5>
-                <form id="form1" runat="server">
+               
                 
                     <label><h6>Nume</h6></label>
                     <div class="form-group mb-3">
@@ -80,10 +85,38 @@
                     <asp:button class="btn btn-primary btn-login text-uppercase fw-bold" Text="Pasul urmator" runat="server" OnClick="Unnamed1_Click"></asp:button>
                 </div>
                 <hr class="my-4">
-                </form>
+                
             </div>
          
         </div>
      </div>
+
+        <div class="footer">
+            <ul>
+                <li class="list-title">Suport</li>
+                <li>Livrări</li>
+                <li>Feedback</li>
+            </ul>
+
+            <ul>
+                <li class="list-title">Politica de confidențialitate</li>
+            </ul>
+
+            <ul>
+                <li class="list-title">Noutați</li>
+            </ul>
+            <ul>
+                <li class="list-title">Contactează-ne</li>
+            </ul>
+
+            <ul>
+                <li><i class="fa-brands fa-twitter-square"></i></li>
+                <li><i class="fa-brands fa-instagram-square"></i></li>
+                <li><i class="fa-brands fa-facebook-square"></i></li>
+            </ul>
+
+        </div>
+
+    </form>
 </body>
 </html>

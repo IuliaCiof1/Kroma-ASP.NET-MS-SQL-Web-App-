@@ -38,3 +38,14 @@
     color:red;
     
 }
+
+.redirect {
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    color:darkgrey;
+    text-align:center;
+}
+
+.redirect span{
+    color:cornflowerblue;
+}

@@ -24,7 +24,7 @@ namespace ShoeWebpage
             foreach (Button btn in filterDiv.Controls.OfType<Button>())
             {
                 if (btn == selected)
-                    btn.Attributes.Add("class", "activeBtn");
+                    btn.Attributes.Add("class", "button active");
                 else
                     btn.Attributes.Add("class", "button");
             }

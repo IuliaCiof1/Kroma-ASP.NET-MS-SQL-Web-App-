@@ -26,9 +26,7 @@
     <form id="form1" runat="server">
     
     <div class="navbar">
-            <div class="logo">
-               <a href="WebForm1.aspx"><img src="Klogo.png" alt="Klogo"/></a>
-            </div>
+            <a href="WebForm1.aspx"><img src="Klogo.png" alt="Klogo"/></a>
 
             <div class="navbar-links">
                 <a href="WebForm1.aspx">Acasă</a>
@@ -39,7 +37,7 @@
             <div class="dropdown">
                 <asp:LinkButton class="dropdownBtn" ID="Dropdown" runat="server">
                     <i class="fa-solid fa-circle-user"></i>
-                    <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-caret-down arrow"></i>
                 </asp:LinkButton>
 
                 <div class="dropdown-content">
@@ -56,34 +54,34 @@
             <asp:Button class="button" ID="Button3" runat="server" Text="Rebook" OnClick="Button3_Click" />
     </div>
 
-    <div class="container-fluid">
-        <asp:Panel CssClass="panel" ID="panel" runat="server" >
-            </asp:Panel>
+        <asp:Panel CssClass="panel" ID="panel" runat="server" ></asp:Panel>
   
         <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
-    
-    </div>
 
     <div class="footer">
             <ul>
-                <li class="list-title">Suport</li>
+                <li>Suport</li>
                 <li>Livrări</li>
                 <li>Feedback</li>
             </ul>
+
             <ul>
-                <li class="list-title">Politica de confidențialitate</li>
+                <li>Politica de confidențialitate</li>
+            </ul>
+
+            <ul>
+                <li>Noutați</li>
             </ul>
             <ul>
-                <li class="list-title">Noutați</li>
+                <li>Contactează-ne</li>
             </ul>
-            <ul>
-                <li class="list-title">Contactează-ne</li>
-            </ul>
+
             <ul>
                 <li><i class="fa-brands fa-twitter-square"></i></li>
                 <li><i class="fa-brands fa-instagram-square"></i></li>
                 <li><i class="fa-brands fa-facebook-square"></i></li>
             </ul>
+
         </div>
     </form>
 </body>
