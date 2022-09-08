@@ -1,51 +1,143 @@
-﻿body {
+﻿*,*::after, *::before{
+    box-sizing:border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
     background-image: url("images/login.jpg");
     background-size:auto;
+    height:100vh;
+    margin:auto;
 }
 
-.logo {
-    text-align: center;
-    background-color: #e6ded5;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 47em;
+    margin: 0 20px;
 }
 
-.logo img{
-    padding-top:18px;
+.card {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 0.25rem;
+    padding: 3rem;
+    flex-grow: 1;
+    margin: 0 200px;
+    max-width: 500px;
+    min-width: 20em;
+    box-shadow: 2px 6px 21px -4px rgba(150,148,150,1);
 }
 
-.btn-login {
-    font-size: 0.9rem;
-    letter-spacing: 0.05rem;
-    padding: 0.75rem 1rem;
+    .card .logo {
+        background-color: #e6ded5;
+        border-radius:50%;
+        height:70px;
+        width:70px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .card .logo a{
+        height:35px;
+    }
+
+.card-title {
+    margin-bottom: 3rem;
+    font-weight: 300;
+    font-size: 17px;
+    font-family: 'Montserrat', sans-serif;
 }
 
-.btn-google {
-    color: white !important;
-    background-color: #ea4335;
+.input{
+    display:flex;
+    flex-direction:column;
+    margin: 10px 0;
+    width:100%;
 }
 
-.btn-facebook {
-    color: white !important;
-    background-color: #3b5998;
+    .input input {
+        height: 3.5rem;
+        width: 100%;
+        position: relative;
+        top: 0;
+        padding: 20px 10px 5px 10px;
+        font-size: 15px;
+        border-radius: 0.25rem;
+        border: 1px solid hsl(0, 3%, 85%);
+    }
+
+        .input input:focus {
+            outline: 4px solid hsl(210, 100%, 85%) !important;
+        }
+
+    .input > label {
+        position: absolute;
+        padding-left: 10px;
+        padding-top: 5px;
+        z-index: 1;
+        font-family: system-ui;
+        font-size: 13px;
+        color: hsl(0, 2%, 58%);
+    }
+
+.rememberPassCheck{
+    margin:20px 20px 35px 20px;
+    align-self:flex-start;
 }
 
-#lblPasword{
-    color:red;
-    
+    .rememberPassCheck label {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        color: #282626;
+    }
+
+.card .buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content:center;
+}
+
+.card .button {
+    margin: 3px 0;
+    width: 100%;
+    height: 38px;
+    background-color: hsl(210, 100%, 45%);
+    outline:none;
+    border:none;
+    border-radius:0.25rem;
+    font-family: system-ui;
+    color: aliceblue;
+    font-size:18px;
+    font-weight:500;
+}
+
+hr {
+    background-color: hsl(0, 0%, 78%);
+    height: 1px;
+    width: 100%;
+    margin-top: 30px;
+    border:none;
 }
 
 .redirect {
     font-size: 15px;
     font-family: 'Poppins', sans-serif;
-    color:darkgrey;
-    text-align:center;
+    color: darkgrey;
+    text-align: center;
 }
 
-.redirect span{
-    color:cornflowerblue;
-}
+    .redirect a {
+        color: hsl(216, 100%, 60%)
+    }
+
+        .redirect a:hover {
+            color: hsl(216, 100%, 40%)
+        }

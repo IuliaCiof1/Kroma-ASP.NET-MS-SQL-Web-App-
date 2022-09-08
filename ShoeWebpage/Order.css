@@ -1,0 +1,149 @@
+﻿*, *::after, *::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /*overflow-x:hidden;*/
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    top: 0;
+    background-image: url("images/package-delivery2.jpg");
+    background-size:cover;
+}
+
+:root {
+    --links-bg: #F3F5F9;
+    --navbar: #020301;
+}
+
+.navbar {
+    background-color: #020301;
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 0px 36px !important;
+    flex-wrap: nowrap;
+    z-index:1;
+}
+
+.navbar-links {
+    display: flex;
+    justify-content: center;
+}
+
+/*navbar links*/
+.navbar a {
+    color: var(--links-bg);
+    width: 100px;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}
+
+    .navbar a:hover {
+        color: hsl(45, 86%, 70%)
+    }
+
+.navbar .selected {
+    color: hsl(45, 86%, 51%);
+}
+
+.dropdown {
+    font-size: 40px;
+    color: var(--links-bg);
+}
+
+.dropdownBtn {
+    padding-right: 10px;
+}
+
+    .dropdownBtn .arrow {
+        font-size: 17px;
+    }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: var(--navbar);
+}
+
+    .dropdown-content a {
+        float: none;
+        display: block;
+        font-size: 13px;
+        padding: 10px;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #666557;
+        }
+
+.card {
+    margin: 120px 0 100px 0 !important;
+}
+.card-body {
+    background-color: #b5a1972b;
+    
+}
+
+.footer {
+    clear: both;
+    overflow: hidden;
+    background-color: var(--navbar);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 100px;
+    bottom: 0;
+    margin-top:30px;
+}
+
+    .footer li {
+        list-style: none;
+        color: var(--links-bg);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .footer i {
+        font-size: 20px;
+        padding: 3px;
+    }
+
+@media(max-width:550px) {
+    .navbar {
+        position: relative;
+        flex-direction: column;
+        height: fit-content;
+        padding: .5em 0;
+    }
+
+    .navbar-links {
+        padding: 1em 0;
+    }
+
+    .dropdown {
+        font-size: 30px;
+    }
+
+    .filter {
+        padding-top: 30px;
+    }
+
+    .card{
+        margin-top:150px !important;
+    }
+}
