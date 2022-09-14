@@ -97,9 +97,11 @@ namespace ShoeWebpage
                             Response.Cookies["Email"].Expires = DateTime.Now.AddDays(15);
                             Response.Cookies["Password"].Expires = DateTime.Now.AddDays(15);
 
-                            Logged.setLogged(true);
+                            
                             checkedPass = 1;
                         }
+
+                        Logged.setLogged(true);
 
                         cmd.Parameters.AddWithValue("@rememberpass", Convert.ToInt16(checkedPass));
                         cmd.ExecuteNonQuery();

@@ -141,7 +141,7 @@ namespace ShoeWebpage
                         catch (Exception ex)
                         {
                             lblPasword.Visible = true;
-                            lblPasword.Text = "Parola este prea lungă"+ex.Message;
+                            lblPasword.Text = "Parola este prea lungă";
                         }
 
                         finally
