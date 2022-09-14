@@ -11,7 +11,16 @@ namespace ShoeWebpage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Logged.isLogged())
+            {
+                dropdownD.Visible = false;
+                dropdownDivLogged.Visible = true;
+            }
+            else
+            {
+                dropdownD.Visible = true;
+                dropdownDivLogged.Visible = false;
+            }
         }
 
         protected void Unnamed1_Click(object sender, EventArgs e)
@@ -23,9 +32,15 @@ namespace ShoeWebpage
             }
             else {
                 lblTel.Visible = false;
-                Response.Redirect("WebForm1.aspx");
+                Response.Redirect("Index.aspx");
                 
             }
+        }
+
+        protected void LogOut_Click(object sender, EventArgs e)
+        {
+            Logged.setLogged(false);
+            Response.Redirect("Index.aspx");
         }
     }
 }

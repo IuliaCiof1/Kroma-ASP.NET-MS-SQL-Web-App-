@@ -1,40 +1,76 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace ShoeWebpage
 {
-    public class ConnectionDB
+    public static class EncDec
     {
-        public static SqlConnection conn = new SqlConnection("Data Source=" + GetDataSources() + ";Initial Catalog=Users;Integrated Security=True");
-
-        
-        private static string GetDataSources()
+        public static string Encrypt(string clearText)
         {
-            string ServerName = Environment.MachineName;
-            string data_source = "";
-
-            RegistryView registryView = Environment.Is64BitOperatingSystem ? RegistryView.Registry64 : RegistryView.Registry32;
-            
-            using(RegistryKey hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, registryView))
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
             {
-                RegistryKey instanceKey = hklm.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL", false);
-
-                if (instanceKey != null)
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61,
+0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
                 {
-                    foreach (var instanceName in instanceKey.GetValueNames())
-                        data_source = data_source + (ServerName + "\\" + instanceName);
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(),
+                   CryptoStreamMode.Write))
+                    {
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+                    clearText = Convert.ToBase64String(ms.ToArray());
                 }
             }
-
-            return data_source;
+            return clearText;
         }
+        public static string Decrypt(string cipherText)
+        {
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61,
+0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(),
+                   CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return cipherText;
+        }
+    }
+
+
+
+    public class ConnectionDB
+    {
+        //public static SqlConnection conn = new SqlConnection("Data Source=" + ";Initial Catalog=Users;Integrated Security=True");
+
+        public static SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UsersConnectionString"].ConnectionString);
     }
 
     public partial class WebForm3 : System.Web.UI.Page
@@ -44,27 +80,16 @@ namespace ShoeWebpage
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!Page.IsPostBack)
-            //{
-            //    try
-            //    {
-            //        ConnectionDB.conn.Open();
-            //        cmd = new SqlCommand("select Email from Users", ConnectionDB.conn);
 
-            //        dr = cmd.ExecuteReader();
-
-            //        while (dr.Read())
-            //        {
-                        
-            //        }
-            //    }
-            //}
-            
         }
 
-        protected void Unnamed1_Click(object sender, EventArgs e) //buton autentificare
+        protected void Register_Click(object sender, EventArgs e)
         {
-            int validText=0;
+            lblEmail.Visible = false;
+            lblPasword.Visible = false;
+            lblPasword.Visible = false;
+
+            //check if string is a valid email regex
             string strRegex = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
 
             System.Text.RegularExpressions.Regex re = new System.Text.RegularExpressions.Regex(strRegex);
@@ -72,69 +97,69 @@ namespace ShoeWebpage
             if (!re.IsMatch(emailInput.Value))
             {
                 lblEmail.Visible = true;
+                lblEmail.Text = "Adresă de email invalidă.";
+            }
+            else if (!passInput.Value.Any(char.IsDigit) || !passInput.Value.Any(char.IsLetter))
+            {
+                lblPasword.Visible = true;
+                lblPasword.Text = "Parola trebuie să contină numere și litere.";
+            }
+            else if (passInput.Value != repassInput.Value)
+            {
+                lblrePass.Visible = true;
+                lblrePass.Text = "Parolele nu se potrivesc.";
             }
             else
             {
-                lblEmail.Visible = false;
-                validText++;
-            }
 
-            if (!passInput.Value.Any(char.IsDigit) || !passInput.Value.Any(char.IsLower) || !passInput.Value.Any(char.IsUpper))
-            {
-                lblPasword.Visible = true;
-                lblPasword.ForeColor = Color.Red;
-            }
-            else
-            {
-                lblPasword.Visible = false;
-                validText++;
-            }
-
-            try
-            {
-                ConnectionDB.conn.Open();
-            }
-            catch
-            {
-                lblPasword.Visible = true;
-                lblPasword.Text = "eroare deschidere baza de date";
-            }
-
-            if (validText == 2)
-            {
                 try
                 {
+                    ConnectionDB.conn.Open();
+                    cmd = new SqlCommand("select Email from Users where Email = '" + emailInput.Value + "'", ConnectionDB.conn);
 
-                    cmd = new SqlCommand("insert into Users (Email,Password) values(@email,@pass) ", ConnectionDB.conn);
+                    dr = cmd.ExecuteReader();
 
-                    cmd.Parameters.AddWithValue("@email", emailInput.Value.Trim());
-                    cmd.Parameters.AddWithValue("@pass", passInput.Value.Trim());
-
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    if (rowsAffected == 1)
+                    if (dr.Read())
                     {
-                        Response.Redirect("WebForm1.aspx");
+                        lblEmail.Visible = true;
+                        lblEmail.Text = "Email deja inregistrat.";
                     }
                     else
                     {
-                        lblPasword.Visible = true;
-                        lblPasword.Text = "eroare inserare";
+                        try
+                        {
+                            ConnectionDB.conn.Close();
+                            ConnectionDB.conn.Open();
+                            cmd = new SqlCommand("insert into Users (Email,Password) values(@email,@pass) ", ConnectionDB.conn);
+
+                            cmd.Parameters.AddWithValue("@email", emailInput.Value.Trim());
+                            cmd.Parameters.AddWithValue("@pass", EncDec.Encrypt(passInput.Value.Trim()));
+
+                            cmd.ExecuteNonQuery(); //ExecuteNonQuery() - used for statements that don't return result sets
+                            Response.Redirect("Login.aspx");
+                        }
+                        catch (Exception ex)
+                        {
+                            lblPasword.Visible = true;
+                            lblPasword.Text = "Parola este prea lungă"+ex.Message;
+                        }
+
+                        finally
+                        {
+                            ConnectionDB.conn.Close();
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
                     lblPasword.Visible = true;
-                    lblPasword.Text = "email deja inregistrat";
-                }
-
-                finally
-                {
+                    lblPasword.Text = "eroare conectare la baza de date" + ex.Message;
                     ConnectionDB.conn.Close();
                 }
-            }
+            }  
         }
 
-        protected void Unnamed2_Click(object sender, EventArgs e)
+        protected void Back_Click(object sender, EventArgs e)
         {
             Response.Redirect("Index.aspx");
         }

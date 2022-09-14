@@ -29,7 +29,7 @@
                 <a href="Order.aspx">Comandă</a>
             </div>
 
-            <div class="dropdown">
+            <div class="dropdown" id="dropdownD" runat="server">
                 <asp:LinkButton class="dropdownBtn" ID="Dropdown" runat="server">
                     <i class="fa-solid fa-circle-user"></i>
                     <i class="fa fa-caret-down arrow"></i>
@@ -38,6 +38,17 @@
                 <div class="dropdown-content">
                     <a href="Register.aspx">Inregistrare</a>
                     <a href="Login.aspx">Autentificare</a>
+                </div>
+            </div>
+
+            <div class="dropdown logged" id="dropdownDivLogged" runat="server">
+                <asp:LinkButton class="dropdownBtn logged" ID="dropdownLogged" runat="server">
+                    <div><img src="images/loggedUser.jpg" alt="loggedUser"/></div>
+                    <i class="fa fa-caret-down arrow"></i>
+                </asp:LinkButton>
+
+                <div class="dropdown-content logged">
+                   <asp:Button id="logOutBtn" runat="server"  onclick="LogOut_Click" Text="Delogare"/>
                 </div>
             </div>
 

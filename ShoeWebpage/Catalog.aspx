@@ -14,12 +14,7 @@
     <meta charset="utf-8"/>
  <!--paginile web sa fie fie afisate corect pentru orice rezolutie -->
  <meta name="viewport" content="width=device-width, initial=1"/>
- <!--Se introduc bibliotecile pentru Bootstrap, FontAwesome, JQuery-->
- <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
- <script src="https://kit.fontawesome.com/a076d05399.js"></script>--%>
+
 </head>
 <body>
     
@@ -34,7 +29,7 @@
                 <a href="Order.aspx">Comandă</a>
             </div >
 
-            <div class="dropdown">
+            <div class="dropdown" id="dropdownD" runat="server">
                 <asp:LinkButton class="dropdownBtn" ID="Dropdown" runat="server">
                     <i class="fa-solid fa-circle-user"></i>
                     <i class="fa fa-caret-down arrow"></i>
@@ -45,13 +40,25 @@
                     <a href="Login.aspx">Autentificare</a>
                 </div>
             </div>
+
+        <div class="dropdown logged" id="dropdownDivLogged" runat="server">
+                <asp:LinkButton class="dropdownBtn logged" ID="dropdownLogged" runat="server">
+                    <div><img src="images/loggedUser.jpg" alt="loggedUser"/></div>
+                    <i class="fa fa-caret-down arrow"></i>
+                </asp:LinkButton>
+
+                <div class="dropdown-content logged">
+                   <asp:Button id="logOutBtn" runat="server"  onclick="LogOut_Click" Text="Delogare"/>
+                </div>
+            </div>
+
      </div>
 
     <div class="filter" id="filterDiv" runat="server">
         <h5>Filtru</h5>
-            <asp:Button class="button" ID="Button1" runat="server" Text="Toate" OnClick="Button1_Click" />
-            <asp:Button class="button" ID="Button2" runat="server" Text="Adidas" OnClick="Button2_Click" />
-            <asp:Button class="button" ID="Button3" runat="server" Text="Rebook" OnClick="Button3_Click" />
+            <asp:Button class="button" ID="Button1" runat="server" Text="Toate" OnClick="FilterAll_Click" />
+            <asp:Button class="button" ID="Button2" runat="server" Text="Adidas" OnClick="FilterAdidas_Click" />
+            <asp:Button class="button" ID="Button3" runat="server" Text="Rebook" OnClick="FilterRebook_Click" />
     </div>
 
         <asp:Panel CssClass="panel" ID="panel" runat="server" ></asp:Panel>
@@ -83,6 +90,8 @@
             </ul>
 
         </div>
+        <%--<asp:SqlDataSource ID="Sample" runat="server" ConnectionString="<%$ ConnectionStrings:UsersConnectionString %>" SelectCommand="SELECT * FROM [Shoes]"></asp:SqlDataSource>--%>
     </form>
+
 </body>
 </html>

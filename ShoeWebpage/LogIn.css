@@ -87,6 +87,10 @@ body {
         color: hsl(0, 2%, 58%);
     }
 
+    .lblInput{
+        font-family:system-ui;
+    }
+
 .rememberPassCheck{
     margin:20px 20px 35px 20px;
     align-self:flex-start;
@@ -118,6 +122,11 @@ body {
     font-size:18px;
     font-weight:500;
 }
+
+    .card .button:hover {
+        background-color: hsl(210, 100%, 40%);
+        cursor:pointer;
+    }
 
 hr {
     background-color: hsl(0, 0%, 78%);

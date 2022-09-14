@@ -46,7 +46,7 @@ namespace ShoeWebpage {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText passInput;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword passInput;
         
         /// <summary>
         /// lblPasword control.
@@ -64,15 +64,15 @@ namespace ShoeWebpage {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText repassInput;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword repassInput;
         
         /// <summary>
-        /// Label1 control.
+        /// lblrePass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label lblrePass;
     }
 }

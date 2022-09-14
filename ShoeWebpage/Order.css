@@ -11,6 +11,7 @@ body {
     top: 0;
     background-image: url("images/package-delivery2.jpg");
     background-size:cover;
+    height:100%;
 }
 
 :root {
@@ -89,6 +90,57 @@ body {
             background-color: #666557;
         }
 
+        .dropdown.logged a{
+            width:60px;
+        }
+
+.dropdownBtn.logged {
+    display: flex;
+    position: relative;
+    align-items: center;
+    /*width:0;*/
+}
+
+    .dropdownBtn.logged i {
+        position: absolute;
+        bottom: .3em;
+        right: 0;
+    }
+
+.dropdownBtn img { /*for logged users*/
+    width: 45px;
+    border-radius: 25px;
+    margin-right: 7px;
+    margin-bottom:5px;
+}
+
+.dropdown-content.logged {
+    margin-top: -.5em;
+    background-color: transparent;
+    outline: none;
+}
+
+    .dropdown-content.logged input {
+        background-color: var(--navbar);
+        color: var(--links-bg);
+        font-weight: 600;
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        padding: 10px 10px;
+        cursor: pointer;
+        font-size:12px;
+    }
+
+        .dropdown-content.logged input:hover {
+            background-color: #666557;
+            color: hsl(45, 86%, 70%);
+        }
+
+.logged {
+    height: 100%;
+}
+
+
 .card {
     margin: 120px 0 100px 0 !important;
 }
@@ -129,6 +181,10 @@ body {
         flex-direction: column;
         height: fit-content;
         padding: .5em 0;
+    }
+
+    .navbar .logo{
+        margin-top:5px;
     }
 
     .navbar-links {

@@ -29,29 +29,29 @@
                             <div class="form-floating mb-3">
                                 <input class="form-control" id="emailInput" runat="server"/>
                                 <label for="floatingInput">Adresă Email</label>
-                                <asp:Label ID="lblEmail" runat="server" Visible="False" Text="Email invalid" ForeColor="#F24B0D"></asp:Label>
+                                <asp:Label ID="lblEmail" runat="server" Visible="False" Text="" ForeColor="#F24B0D"></asp:Label>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="passInput" runat="server"/>
+                                <input class="form-control" id="passInput" type="password" runat="server"/>
                                 <label for="pass">Parolă</label>
-                                <asp:Label ID="lblPasword" runat="server" Visible="False" Text="Parola contine numere, litere mici (a-z) si majuscule (A-Z)" ForeColor="#F24B0D"></asp:Label>
+                                <asp:Label ID="lblPasword" runat="server" Visible="False" Text="" ForeColor="#F24B0D"></asp:Label>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="repassInput" runat="server"/>
+                                <input class="form-control" id="repassInput" type="password" runat="server"/>
                                 <label for="repassInput">Rescrie parola</label>
-                                <asp:Label ID="Label1" runat="server" Visible="False" Text="Parola contine numere, litere mici (a-z) si majuscule (A-Z)" ForeColor="#F24B0D"></asp:Label>
+                                <asp:Label ID="lblrePass" runat="server" Visible="False" Text="" ForeColor="#F24B0D"></asp:Label>
                                 
                                 <br />
                             </div>
 
                             <div class="d-grid mt-2">
-                                <asp:button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" runat="server" Text="Înregistreaza-te" OnClick="Unnamed1_Click"></asp:button>
+                                <asp:button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" runat="server" Text="Înregistreaza-te" OnClick="Register_Click"></asp:button>
                             </div>
 
                             <div class="d-grid mt-2">
-                                <asp:button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" runat="server" Text="Înapoi" OnClick="Unnamed2_Click"></asp:button>
+                                <asp:button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" runat="server" Text="Înapoi" OnClick="Back_Click"></asp:button>
                             </div>
 
                             <hr class="my-4"/>
@@ -65,6 +65,6 @@
             </div>
         </div>
     </div>
-
+    <%--<asp:SqlDataSource ID="Sample" runat="server"></asp:SqlDataSource>--%>
 </body>
 </html>

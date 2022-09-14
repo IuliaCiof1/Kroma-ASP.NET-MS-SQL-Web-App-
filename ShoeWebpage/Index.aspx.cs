@@ -12,6 +12,22 @@ namespace ShoeWebpage
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Logged.isLogged())
+            {
+                dropdownD.Visible = false;
+                dropdownDivLogged.Visible = true;
+            }
+            else if (!Logged.isLogged())
+            {
+                dropdownD.Visible = true;
+                dropdownDivLogged.Visible = false;
+            }
+        }
+
+        protected void LogOut_Click(object sender, EventArgs e)
+        {
+            Logged.setLogged(false);
+            Response.Redirect("Index.aspx");
         }
     }
 }

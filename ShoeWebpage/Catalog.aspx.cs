@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -13,10 +14,21 @@ namespace ShoeWebpage
     {
         SqlCommand cmd;
         SqlDataReader dr;
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
-            Button1_Click(Button1, EventArgs.Empty);
+            FilterAll_Click(Button1, EventArgs.Empty);
+
+            if (Logged.isLogged())
+            {
+                dropdownD.Visible = false;
+                dropdownDivLogged.Visible = true;
+            }
+            else
+            {
+                dropdownD.Visible = true;
+                dropdownDivLogged.Visible = false;
+            }
         }
 
         protected void ActiveButton(Button selected)
@@ -51,7 +63,7 @@ namespace ShoeWebpage
             }
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void FilterAll_Click(object sender, EventArgs e)
         {
             panel.Controls.Clear();
             ActiveButton((Button)sender);
@@ -61,7 +73,7 @@ namespace ShoeWebpage
                 ConnectionDB.conn.Open();
 
                 cmd = new SqlCommand("select * from Shoes", ConnectionDB.conn);
-                //cmd = new SqlCommand("select substring('Price', patindex('%[^0]%', 'Price'+'.'), len('Price'))", ConnectionDB.conn);
+                
                 dr = cmd.ExecuteReader();
 
                 ReadDb(dr);
@@ -70,11 +82,11 @@ namespace ShoeWebpage
             }
             catch (Exception ex)
             {
-                lblError.Text = "Eroare conectare la baza de date";
+                lblError.Text = "Eroare conectare la baza de date" + ex.Message;
             }
         }
 
-        protected void Button2_Click(object sender, EventArgs e)
+        protected void FilterAdidas_Click(object sender, EventArgs e)
         {
             panel.Controls.Clear();
             ActiveButton((Button)sender);
@@ -92,11 +104,11 @@ namespace ShoeWebpage
             }
             catch (Exception ex)
             {
-                lblError.Text = "Eroare conectare la baza de date";
+                lblError.Text = "Eroare conectare la baza de date" + ex.Message;
             }
         }
 
-        protected void Button3_Click(object sender, EventArgs e)
+        protected void FilterRebook_Click(object sender, EventArgs e)
         {
             panel.Controls.Clear();
             ActiveButton((Button)sender);
@@ -113,8 +125,15 @@ namespace ShoeWebpage
             }
             catch (Exception ex)
             {
-                lblError.Text = "Eroare conectare la baza de date";
+                lblError.Text = "Eroare conectare la baza de date" + ex.Message;
             }
         }
+
+        protected void LogOut_Click(object sender, EventArgs e)
+        {
+            Logged.setLogged(false);
+            Response.Redirect("Index.aspx");
+        }
+
     }
 }

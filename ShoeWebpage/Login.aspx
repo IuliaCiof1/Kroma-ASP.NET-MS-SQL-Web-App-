@@ -23,23 +23,24 @@
 
                 <div class="input">
                     <label for="inputEmail">Adresa Email</label>
-                    <input type="email" class="inputEmail" id="inputEmail"/>
-                    
+                    <input type="email" class="inputEmail" id="inputEmail" runat="server"/>
+                    <asp:Label CssClass="lblInput" ID="lblEmail" runat="server" Visible="false" ForeColor="#F24B0D"></asp:Label>
                 </div>
 
                 <div class="input">
                     <label for="inputPass">Parolă</label>
-                    <input type="password" class="inputPass" id="inputPass"/>
+                    <input type="password" class="inputPass" id="inputPass" runat="server"/>
+                    <asp:Label CssClass="lblInput" ID="lblPass" runat="server" Visible="false" ForeColor="#F24B0D"></asp:Label>
                 </div>
 
                 <div class="rememberPassCheck">
                     <label for="rememberPass">Reține parola</label>
-                    <input type="checkbox" value="" id="rememberPass"/>
+                    <input type="checkbox" value="" id="rememberPass" runat="server"/>
                 </div>
 
                 <div class="buttons">
-                    <asp:button id="loginBtn" CssClass="button" runat="server" Text="AUTENTIFICĂ-TE"></asp:button>
-                    <asp:button id="backBtn" CssClass="button" runat="server" Text="ÎNAPOI"/>
+                    <asp:button id="loginBtn" CssClass="button" runat="server" Text="AUTENTIFICĂ-TE" OnClick="loginBtn_Click"/>
+                    <asp:button id="backBtn" CssClass="button" runat="server" Text="ÎNAPOI" OnClick="backBtn_Click"/>
                 </div>
 
                 <hr />
@@ -47,6 +48,7 @@
                 <p class="redirect">Nu ți-ai făcut cont? <a href="Register.aspx">Înregistrează-te</a> !</p>
             </div>
         </div>
+        <%--<asp:SqlDataSource ID="Sample" runat="server" ConnectionString="<%$ ConnectionStrings:UsersConnectionString %>" SelectCommand="SELECT * FROM [Users]"></asp:SqlDataSource>--%>
     </form>
 </body>
 </html>
